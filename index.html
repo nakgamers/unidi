@@ -1,1 +1,763 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- =========================================
+     META TAGS UNTUK WHATSAPP / SOSMED
+     ========================================= -->
+<!-- Judul yang muncul di WA -->
+<title>The Wedding of Arif & Pari</title>
+<meta property="og:title" content="The Wedding of Arif & Pari">
 
+<!-- Deskripsi singkat di bawah judul -->
+<meta property="og:description" content="Sabtu, 04 April 2026. Kepada Yth. Bapak/Ibu/Saudara/i, kami mengundang Anda untuk hadir di pernikahan kami.">
+
+<!-- Gambar Thumbnail (Ganti URL ini dengan foto kamu sendiri) -->
+<!-- PENTING: Harus menggunakan HTTPS lengkap, jangan file lokal -->
+<meta property="og:image" content="https://i.ibb.co.com/HLw8F6Jv/20260209-160802.png">
+
+<!-- Tipe konten -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aripari.qzz.io/">
+
+<!-- Favicon (Ikon kecil di tab browser) -->
+<link rel="icon" type="image/png" href="https://img.icons8.com/color/48/wedding-rings.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --gold:#b08d57;
+  --bg1:#fffaf3;
+  --bg2:#fdebd0;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(var(--bg1),var(--bg2));
+  color:#333;
+  overflow-x: hidden;
+}
+
+h1,h2{
+  font-family:'Playfair Display',serif;
+  color:var(--gold);
+}
+
+.center{text-align:center}
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  flex-direction: column;
+}
+
+.card{
+  background:#fff;
+  margin:20px 16px;
+  padding:30px 20px; /* Padding sedikit diperkecil agar ruang konten lebih lega */
+  border-radius:26px;
+  box-shadow:0 15px 40px rgba(0,0,0,.12);
+  opacity:0;
+  transform:translateY(40px);
+  transition:all .9s ease;
+  max-width: 500px;
+  width: calc(100% - 32px);
+  position: relative;
+}
+
+section.card {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* --- COUNTDOWN STYLES (FIXED) --- */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px; /* Jarak antar kotak diperkecil */
+    margin: 25px 0;
+    width: 100%; /* Pastikan container tidak melebihi lebar induk */
+}
+
+.countdown-box {
+    background: var(--bg1);
+    padding: 10px 2px; /* Padding kiri-kanan kecil agar muat */
+    border-radius: 10px;
+    flex: 1; /* Agar lebar otomatis menyesuaikan layar */
+    min-width: 0; /* Mencegah overflow flex item */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.countdown-number {
+    font-size: 18px; /* Font sedikit diperkecil agar aman di HP kecil */
+    font-weight: bold;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    color: #888;
+    margin-top: 4px;
+}
+
+button,.btn{
+  padding:12px 26px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#c8a45d,#f5d48e);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  margin-top: 10px;
+  transition: transform 0.2s;
+  box-shadow: 0 5px 15px rgba(200, 164, 93, 0.4);
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.guest{
+  margin-top:20px;
+  font-size:14px;
+  opacity:.9;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  width: 90%; /* Diperlebar sedikit */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.map-preview{
+  display:block;
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  margin-top: 15px;
+}
+
+.map-preview img{
+  width:100%;
+  height: 200px;
+  object-fit: cover;
+  display:block;
+}
+
+.map-overlay{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:10px;
+  background:rgba(0,0,0,.6);
+  color:#fff;
+  font-weight:600;
+  text-align:center;
+  font-size: 12px;
+  backdrop-filter: blur(2px);
+}
+
+.amplop{
+  background:#fff6ef;
+  padding:18px;
+  border-radius:18px;
+  margin-top:16px;
+  border: 1px dashed var(--gold);
+}
+
+footer{
+  text-align:center;
+  font-size:13px;
+  margin:40px 0;
+  opacity:.7;
+  padding-bottom: 20px;
+}
+
+/* --- AI FEATURES STYLES --- */
+.wish-form input, .wish-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+}
+.wish-result {
+    margin-top: 15px;
+    padding: 15px;
+    background: #fdfbf7;
+    border-left: 3px solid var(--gold);
+    font-style: italic;
+    font-size: 14px;
+    display: none;
+    position: relative;
+}
+.wish-result button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px 10px;
+    font-size: 10px;
+    margin: 0;
+    box-shadow: none;
+}
+
+.chat-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#c8a45d,#b08d57);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    z-index: 1000;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.chat-btn:hover { transform: scale(1.1); }
+
+.chat-window {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-header {
+    background: var(--gold);
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chat-header h3 { margin: 0; font-size: 16px; font-family: 'Poppins', sans-serif; }
+.close-chat { background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 0; margin: 0; }
+
+.chat-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.msg {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+.msg.bot {
+    background: #f1f1f1;
+    align-self: flex-start;
+    border-top-left-radius: 2px;
+}
+.msg.user {
+    background: #fdebd0;
+    align-self: flex-end;
+    border-top-right-radius: 2px;
+}
+
+.chat-input-area {
+    padding: 10px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 5px;
+}
+.chat-input-area input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+.chat-input-area button {
+    padding: 0 15px;
+    margin: 0;
+    border-radius: 20px;
+    box-shadow: none;
+}
+
+.typing {
+    display: flex;
+    gap: 4px;
+    padding: 10px;
+    background: #f1f1f1;
+    border-radius: 14px;
+    align-self: flex-start;
+    width: fit-content;
+}
+.dot {
+    width: 6px;
+    height: 6px;
+    background: #aaa;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+@keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+</style>
+</head>
+
+<body>
+
+<!-- 🎶 MUSIC -->
+<audio id="music" loop>
+  <source src="https://cdn1.suno.ai/a233ab42-4d73-4322-883f-aeac6435f041.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🌸 OPENING (HERO) -->
+<section class="hero card reveal active">
+  <div style="width: 100%;"> <!-- Pastikan konten full width -->
+    <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 12px; color: #888;">Undangan Pernikahan</p>
+    <h1 style="font-size: 3rem; margin: 10px 0;">Arif & Pari</h1>
+    <p>04 April 2026</p>
+
+    <!-- COUNTDOWN WIDGET -->
+    <div class="countdown-container">
+        <div class="countdown-box">
+            <span class="countdown-number" id="days">00</span>
+            <span class="countdown-label">Hari</span>
+        </div>
+        <div class="countdown-box">
+            <span class="countdown-number" id="hours">00</span>
+            <span class="countdown-label">Jam</span>
+        </div>
+        <div class="countdown-box">
+            <span class="countdown-number" id="minutes">00</span>
+            <span class="countdown-label">Menit</span>
+        </div>
+        <div class="countdown-box">
+            <span class="countdown-number" id="seconds">00</span>
+            <span class="countdown-label">Detik</span>
+        </div>
+    </div>
+
+    <div class="guest">
+      Kepada Yth.<br>
+      <strong id="guestName" style="font-size: 1.2rem; display: block; margin: 5px 0; color: #333;">Tamu Undangan</strong>
+    </div>
+
+    <button onclick="openInvite()" style="margin-top: 20px;">Buka Undangan 💌</button>
+  </div>
+</section>
+
+<!-- 👰🤵 MEMPELAI -->
+<section class="card reveal center" id="main-content">
+  <h2>Mempelai</h2>
+
+  <div style="margin-bottom: 20px;">
+      <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 5px; color: var(--gold); font-family: 'Playfair Display', serif;">PARI</p>
+      <p style="margin: 0; font-weight: 600;">PARIKESIT</p>
+      <p style="font-size: 12px; margin-top: 5px; color: #666;">Putri dari Bpk. Dasma <br>& Ibu Rohanah Mulyani</p>
+      <a href="https://instagram.com/parikesit_14" style="text-decoration: none; color: var(--gold); font-size: 12px;">@parikesit_14</a>
+  </div>
+
+  <p style="font-family: 'Playfair Display', serif; font-size: 30px; color: #ddd;">&</p>
+
+  <div style="margin-top: 20px;">
+      <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 5px; color: var(--gold); font-family: 'Playfair Display', serif;">ARIF</p>
+      <p style="margin: 0; font-weight: 600;">ARIEF RAHMAN HAKIM</p>
+      <p style="font-size: 12px; margin-top: 5px; color: #666;">Putra dari Bpk. M. Nur <br>& Ibu Jamilah</p>
+      <a href="https://instagram.com/arif_nsc" style="text-decoration: none; color: var(--gold); font-size: 12px;">@arif_nsc</a>
+  </div>
+</section>
+
+<!-- 📆 ACARA -->
+<section class="card reveal center">
+  <h2>Rangkaian Acara</h2>
+  
+  <div style="margin-bottom: 30px;">
+      <h3 style="margin: 5px 0; font-size: 20px;">Akad Nikah</h3>
+      <p style="font-weight: bold; color: #555;">Sabtu, 04 April 2026</p>
+      <p style="font-size: 14px;">10:00 WIB - Selesai</p>
+      <p style="font-size: 13px; color: #777;">Kp. Warudoyong RT.07/08</p>
+  </div>
+  
+  <hr style="border: 0; border-top: 1px dashed #ddd; width: 60%; margin: 20px auto;">
+
+  <div>
+      <h3 style="margin: 5px 0; font-size: 20px;">Resepsi</h3>
+      <p style="font-weight: bold; color: #555;">Sabtu, 04 April 2026</p>
+      <p style="font-size: 14px;">10:00 WIB - Selesai</p>
+      <p style="font-size: 13px; color: #777;">Kp. Warudoyong RT.07/08</p>
+  </div>
+</section>
+
+<!-- 📍 MAP -->
+<section class="card reveal">
+  <h2 class="center">Lokasi Acara</h2>
+  <p class="center" style="font-size: 13px;">Patokan: Toko Pondok Tamiya / Stasiun Buaran</p>
+
+  <a class="map-preview" target="_blank"
+     href="https://www.google.com/maps/search/?api=1&query=Warung+Toing+Buaran">
+    <!-- Menggunakan gambar resolusi tinggi untuk map agar tidak pecah -->
+    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Peta Lokasi">
+    <div class="map-overlay">Klik untuk membuka Google Maps</div>
+  </a>
+</section>
+
+<!-- 💖 LOVE STORY -->
+<section class="card reveal center">
+  <h2>Love Story</h2>
+  <div style="border-left: 2px solid var(--gold); padding-left: 20px; text-align: left; margin-left: 20px;">
+      <div style="margin-bottom: 20px;">
+          <p style="margin: 0; font-size: 12px; font-weight: bold; color: var(--gold); text-transform: uppercase;">20 Desember 2025</p>
+          <h3 style="margin: 5px 0; font-size: 18px;">Tunangan</h3>
+          <p style="font-size: 13px; line-height: 1.5; color: #555;">Momen dimana kami mengikat janji untuk melangkah ke jenjang yang lebih serius.</p>
+      </div>
+      <div>
+        <p style="margin: 0; font-size: 12px; font-weight: bold; color: var(--gold); text-transform: uppercase;">04 April 2026</p>
+          <h3 style="margin: 5px 0; font-size: 18px;">Pernikahan</h3>
+          <p style="font-size: 13px; line-height: 1.5; color: #555;">Hari yang dinanti, awal dari perjalanan hidup bersama dalam ikatan suci.</p>
+      </div>
+  </div>
+</section>
+
+<!-- 💳 AMPLOP DIGITAL -->
+<section class="card reveal center">
+  <h2>Amplop Digital</h2>
+  <p style="font-size: 13px; margin-bottom: 20px;">Doa restu Anda adalah kado terindah bagi kami.</p>
+
+  <div class="amplop">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong style="font-size: 1.2rem;">BCA</strong>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/2560px-Bank_Central_Asia.svg.png" style="height:15px; opacity:0.6;">
+    </div>
+    <div style="text-align: left; margin-top: 10px;">
+        <span style="font-size: 12px; color: #666;">a.n ARIEF RAHMAN HAKIM</span>
+        <div style="font-family: monospace; font-size: 18px; font-weight:bold; letter-spacing: 1px; color:#333;">6370360632</div>
+    </div>
+    <button onclick="copyText('6370360632')" style="font-size: 12px; padding: 6px 14px; margin-top: 10px; width: 100%;">Salin No. Rek</button>
+  </div>
+
+  <div class="amplop">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong style="font-size: 1.2rem;">BCA</strong>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/2560px-Bank_Central_Asia.svg.png" style="height:15px; opacity:0.6;">
+    </div>
+    <div style="text-align: left; margin-top: 10px;">
+        <span style="font-size: 12px; color: #666;">a.n PARIKESIT</span>
+        <div style="font-family: monospace; font-size: 18px; font-weight:bold; letter-spacing: 1px; color:#333;">4120387176</div>
+    </div>
+    <button onclick="copyText('4120387176')" style="font-size: 12px; padding: 6px 14px; margin-top: 10px; width: 100%;">Salin No. Rek</button>
+  </div>
+</section>
+
+<!-- ✨ AI WISH GENERATOR -->
+<section class="card reveal center">
+    <h2>Buat Ucapan (AI) ✨</h2>
+    <p style="font-size: 13px; margin-bottom: 20px;">Bingung merangkai kata? Biarkan AI membantu membuatkan ucapan spesial.</p>
+    
+    <div class="wish-form">
+        <input type="text" id="wisherName" placeholder="Nama Anda (Cth: Budi)">
+        <select id="relation">
+            <option value="Teman">Teman</option>
+            <option value="Sahabat">Sahabat</option>
+            <option value="Keluarga">Keluarga</option>
+            <option value="Rekan Kerja">Rekan Kerja</option>
+        </select>
+        <select id="tone">
+            <option value="Menyentuh">Gaya: Menyentuh</option>
+            <option value="Lucu">Gaya: Lucu / Santai</option>
+            <option value="Islami">Gaya: Islami</option>
+            <option value="Puitis">Gaya: Puitis</option>
+        </select>
+        <button onclick="generateWish()" id="btnGenerate">Buatkan Ucapan ✨</button>
+    </div>
+
+    <div class="wish-result" id="wishResult">
+        <p id="wishText">Ucapan akan muncul di sini...</p>
+        <button onclick="copyWish()">Salin</button>
+    </div>
+</section>
+
+<!-- 📲 RSVP -->
+<section class="card reveal center">
+  <h2>Konfirmasi Kehadiran</h2>
+  <p style="font-size: 14px; margin-bottom: 20px;">Mohon konfirmasi kehadiran Anda melalui WhatsApp:</p>
+  
+  <a href="https://wa.me/6288289978035?text=Halo%20Arif%20%26%20Pari,%20saya%20hadir." target="_blank" style="text-decoration: none;">
+      <button style="background: #25D366; width: 100%; margin-bottom: 10px; border-radius: 8px;">Chat WA Mempelai 1</button>
+  </a>
+  <a href="https://wa.me/6289668989958?text=Halo%20Arif%20%26%20Pari,%20saya%20hadir." target="_blank" style="text-decoration: none;">
+      <button style="background: #128C7E; width: 100%; border-radius: 8px;">Chat WA Mempelai 2</button>
+  </a>
+</section>
+
+<footer>
+  <p style="font-family:'Playfair Display', serif; font-size: 18px; margin-bottom: 5px;">Arif & Pari</p>
+  <span style="font-size: 11px;">04 April 2026</span><br><br>
+  <span style="font-size: 10px; opacity: 0.6">Created By <a href="https://nandz.my.id"> Nandz </a> ✨</span>
+</footer>
+
+<!-- 🤖 CHATBOT FLOATING BUTTON -->
+<div class="chat-btn" onclick="toggleChat()">💬</div>
+
+<!-- CHAT WINDOW -->
+<div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+        <h3>Asisten Pernikahan 🤖</h3>
+        <button class="close-chat" onclick="toggleChat()">×</button>
+    </div>
+    <div class="chat-body" id="chatBody">
+        <div class="msg bot">Halo! Saya Quineilla asisten pintar yang dibuat oleh Nandar untuk pernikahan Arif & Pari. Ada yang bisa dibantu? 😊</div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Tanya jam, lokasi..." onkeypress="handleEnter(event)">
+        <button onclick="sendMessage()">➤</button>
+    </div>
+</div>
+
+<script>
+// ==========================================
+// 🔑 KONFIGURASI API KEY GEMINI
+// ==========================================
+const GEMINI_API_KEY = ""; // <-------- API KEY DISINI 
+// ==========================================
+
+// --- COUNTDOWN LOGIC (Baru) ---
+function updateCountdown() {
+    // Tanggal pernikahan: 4 April 2026
+    const weddingDate = new Date("April 4, 2026 10:00:00").getTime();
+    const now = new Date().getTime();
+    const gap = weddingDate - now;
+
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+
+    const d = Math.floor(gap / day);
+    const h = Math.floor((gap % day) / hour);
+    const m = Math.floor((gap % hour) / minute);
+    const s = Math.floor((gap % minute) / second);
+
+    document.getElementById("days").innerText = d;
+    document.getElementById("hours").innerText = h;
+    document.getElementById("minutes").innerText = m;
+    document.getElementById("seconds").innerText = s;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown(); // Jalankan langsung
+
+
+// --- GEMINI API HELPER FUNCTION ---
+async function callGemini(prompt, systemInstruction = "") {
+    if (!GEMINI_API_KEY) {
+        alert("API Key Gemini belum diisi di dalam kode!");
+        return "Error: API Key Missing";
+    }
+
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${GEMINI_API_KEY}`;
+    
+    const payload = {
+        contents: [{ parts: [{ text: prompt }] }],
+        systemInstruction: { parts: [{ text: systemInstruction }] }
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        return data.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf, saya tidak mengerti.";
+    } catch (error) {
+        console.error("Error:", error);
+        return "Maaf, terjadi kesalahan koneksi. Coba lagi nanti.";
+    }
+}
+
+// --- WISH GENERATOR LOGIC ---
+async function generateWish() {
+    const name = document.getElementById('wisherName').value;
+    const relation = document.getElementById('relation').value;
+    const tone = document.getElementById('tone').value;
+    const btn = document.getElementById('btnGenerate');
+    const resultBox = document.getElementById('wishResult');
+    const resultText = document.getElementById('wishText');
+
+    if(!name) { alert("Mohon isi nama Anda dulu"); return; }
+
+    btn.innerText = "Sedang Membuat... ⏳";
+    btn.disabled = true;
+    resultBox.style.display = 'block';
+    resultText.innerText = "Sedang mengetik...";
+
+    const prompt = `Buatkan ucapan pernikahan singkat (maksimal 2 kalimat) untuk Arif & Pari. 
+    Pengirim: ${name}. Hubungan: ${relation}. Gaya bahasa: ${tone}. Bahasa: Indonesia.`;
+
+    const text = await callGemini(prompt, "Kamu adalah penulis kreatif untuk kartu ucapan pernikahan.");
+    
+    resultText.innerText = text;
+    btn.innerText = "Buatkan Ucapan ✨";
+    btn.disabled = false;
+}
+
+function copyWish() {
+    const text = document.getElementById('wishText').innerText;
+    navigator.clipboard.writeText(text);
+    alert("Ucapan berhasil disalin!");
+}
+
+
+// --- CHATBOT LOGIC ---
+function toggleChat() {
+    const chat = document.getElementById('chatWindow');
+    if (chat.style.display === 'flex') {
+        chat.style.display = 'none';
+    } else {
+        chat.style.display = 'flex';
+    }
+}
+
+function handleEnter(e) {
+    if (e.key === 'Enter') sendMessage();
+}
+
+async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const body = document.getElementById('chatBody');
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    appendMessage(text, 'user');
+    input.value = '';
+
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'typing';
+    typingDiv.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+    body.appendChild(typingDiv);
+    body.scrollTop = body.scrollHeight;
+
+    // 3. Prepare Prompt
+    const systemPrompt = `
+    Kamu adalah asisten pernikahan sopan dengan nama Quineilla yang dibuat oleh Nandar untuk pernikahan Arif & Pari.
+    Data Acara:
+    - Tanggal: Sabtu, 04 April 2026
+    - Akad & Resepsi: 10:00 WIB - Selesai
+    - Lokasi: Kp. Warudoyong RT.07/08 (Kediaman Mempelai Pria)
+    - Patokan: Toko Pondok Tamiya / Stasiun Buaran
+    - Peta: https://share.google/abmJXSVF4V6Sa567X
+    - Nama Lengkap Mempelai pria: Arif Rahman hakim
+    - Nama Lengkap Mempelai perempuan: Parikesit
+    - Nama pembuat undangan dan Aplikasi : Nandar / Nandz
+    - Nama orangtua Mempelai wanita: Bpk. Dasma
+& Ibu Rohanah Mulyani
+    - Nama orangtua Mempelai Pria: Bpk. M. Nur
+& Ibu Jamilah
+    Jawab pertanyaan tamu dengan singkat, ramah, dan gunakan emoji.
+    `;
+
+    const reply = await callGemini(text, systemPrompt);
+
+    body.removeChild(typingDiv);
+    appendMessage(reply, 'bot');
+}
+
+function appendMessage(text, sender) {
+    const body = document.getElementById('chatBody');
+    const div = document.createElement('div');
+    div.className = `msg ${sender}`;
+    div.innerText = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+}
+
+
+// --- EXISTING SCRIPTS ---
+function openInvite(){
+  var audio = document.getElementById('music');
+  audio.play().catch(function(error) {
+      console.log("Audio play blocked by browser policy: " + error);
+  });
+  
+  document.getElementById('main-content').scrollIntoView({ 
+    behavior: 'smooth' 
+  });
+}
+
+function copyText(txt){
+  navigator.clipboard.writeText(txt).then(function() {
+      alert("Nomor rekening berhasil disalin!");
+  }, function(err) {
+      alert("Silakan salin manual: " + txt);
+  });
+}
+
+const params = new URLSearchParams(window.location.search);
+const guest = params.get("namatamu");
+if(guest){
+  document.getElementById("guestName").innerText =
+    decodeURIComponent(guest.replace(/\+/g," "));
+}
+
+const reveal = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('active');
+    }
+  });
+},{threshold:0.1});
+reveal.forEach(r=>obs.observe(r));
+</script>
+
+</body>
+</html>
